@@ -9,11 +9,9 @@ export default function ProjectScreen({ openProject }) {
     const [dueDate, setDueDate] = useState("");
 
     const cookies = Cookies.get('projects')
-/*     const cookie = Cookies.set('projects', JSON.stringify({
-        "projectList": [{ "title": "test", "description": "test desc", "dueDate": "unknown" }]
-    })) */
-    console.log(cookies);
-    console.log(JSON.parse(cookies))
+    /*     const cookie = Cookies.set('projects', JSON.stringify({
+            "projectList": [{ "title": "test", "description": "test desc", "dueDate": "unknown" }]
+        })) */
 
     function handleChange(e) {
         setTitle(e.target.value);
@@ -23,30 +21,10 @@ export default function ProjectScreen({ openProject }) {
         setDescription(e.target.value);
     }
 
-    function createNewProject() {
-        setIsCreatingProject(true);
+    function handleChangeDueDate(e) {
+        setDueDate(e.target.value)
     }
 
-    function cancelCreateNewProject() {
-        setIsCreatingProject(false);
-    }
-
-    if (!openProject && !creatingProject) {
-        return (
-            <>
-                <div className="flex justify-center items-center flex-col py-3">
-                    <img src={noProjectsImg} alt="No projects" className='w-auto h-32 mt-32' />
-                    <h1 className="text-4xl font-bold mb-6 mt-4">No Project Selected</h1>
-                    <li className="mb-6">
-                        <ul>Select a project or get started with a new one</ul>
-                    </li>
-                    <button onClick={createNewProject} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        + Create new project
-                    </button>
-                </div>
-            </>
-        );
-    }
     if (creatingProject) {
         return (
             <>
@@ -74,10 +52,27 @@ export default function ProjectScreen({ openProject }) {
                         <button className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Save as new project
                         </button>
-                        <button onClick={cancelCreateNewProject} className="text-gay-700 font-bold">
+                        <button onClick={() => setIsCreatingProject(false)} className="text-gay-700 font-bold">
                             Cancel
                         </button>
                     </div>
+                </div>
+            </>
+        );
+    }
+
+    if (!openProject && !creatingProject) {
+        return (
+            <>
+                <div className="flex justify-center items-center flex-col py-3">
+                    <img src={noProjectsImg} alt="No projects" className='w-auto h-32 mt-32' />
+                    <h1 className="text-4xl font-bold mb-6 mt-4">No Project Selected</h1>
+                    <li className="mb-6">
+                        <ul>Select a project or get started with a new one</ul>
+                    </li>
+                    <button onClick={() => setIsCreatingProject(true)} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        + Create new project
+                    </button>
                 </div>
             </>
         );
