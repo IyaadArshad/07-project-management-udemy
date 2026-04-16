@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import noProjectsImg from '../assets/no-projects.png';
+import Cookies from 'js-cookie';
 
 export default function ProjectScreen({ openProject }) {
     const [creatingProject, setIsCreatingProject] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState("");
+
+    const cookies = Cookies.get('projects')
+/*     const cookie = Cookies.set('projects', JSON.stringify({
+        "projectList": [{ "title": "test", "description": "test desc", "dueDate": "unknown" }]
+    })) */
+    console.log(cookies);
+    console.log(JSON.parse(cookies))
 
     function handleChange(e) {
         setTitle(e.target.value);
@@ -17,6 +25,10 @@ export default function ProjectScreen({ openProject }) {
 
     function createNewProject() {
         setIsCreatingProject(true);
+    }
+
+    function cancelCreateNewProject() {
+        setIsCreatingProject(false);
     }
 
     if (!openProject && !creatingProject) {
@@ -62,7 +74,7 @@ export default function ProjectScreen({ openProject }) {
                         <button className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Save as new project
                         </button>
-                        <button className="text-gay-700 font-bold">
+                        <button onClick={cancelCreateNewProject} className="text-gay-700 font-bold">
                             Cancel
                         </button>
                     </div>
