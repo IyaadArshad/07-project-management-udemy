@@ -33,6 +33,9 @@ export default function ProjectScreen({ openProject }) {
             dueDate: dueDate
         }
         // need to get current cookies
+        // {"projectList":[{"title":"test","description":"test desc","dueDate":"unknown"}]}
+        // above is sample list
+        // need to append project to project list
     }
 
     function createNewProject() {
