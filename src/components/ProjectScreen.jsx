@@ -1,13 +1,17 @@
-
 import { useState } from 'react';
 import noProjectsImg from '../assets/no-projects.png';
 
 export default function ProjectScreen({ openProject }) {
     const [creatingProject, setIsCreatingProject] = useState(true);
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
     function handleChange(e) {
         setTitle(e.target.value);
+    }
+
+    function handleChangeDesc(e) {
+        setDescription(e.target.value);
     }
 
     if (!openProject && !creatingProject) {
@@ -34,8 +38,15 @@ export default function ProjectScreen({ openProject }) {
                     <div className='form'>
 
                         <form>
-                            <p className='text-gray-600 text-sm'>Title</p>
-                            <input onChange={handleChange} value={title} className='border w-[30rem] rounded-[12px] h-10 border-gray-400' type='text' />
+                            <div className='mb-4'>
+                                <p className='text-gray-600 mb-1 text-sm'>Title</p>
+                                <input onChange={handleChange} value={title} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='text' />
+                            </div>
+                            <div className='mb-4'>
+                                <p className='text-gray-600 mb-1 text-sm'>Description</p>
+                                <input onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-36 border-gray-400' type='text' />
+                            </div>
+
                         </form>
                     </div>
                     <button className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
