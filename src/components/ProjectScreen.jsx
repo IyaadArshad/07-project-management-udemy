@@ -12,6 +12,7 @@ export default function ProjectScreen({ openProject }) {
     /*     const cookie = Cookies.set('projects', JSON.stringify({
             "projectList": [{ "title": "test", "description": "test desc", "dueDate": "unknown" }]
         })) */
+       console.log(cookies);
 
     function handleChange(e) {
         setTitle(e.target.value);
@@ -25,13 +26,28 @@ export default function ProjectScreen({ openProject }) {
         setDueDate(e.target.value)
     }
 
+    function saveProject() {
+        const project = {
+            title: title,
+            description: description,
+            dueDate: dueDate
+        }
+        // need to get current cookies
+    }
+
+    function createNewProject() {
+        setTitle("")
+        setDescription("")
+        setDueDate("")
+        setIsCreatingProject(true)
+    }
+
     if (creatingProject) {
         return (
             <>
                 <div className="flex items-start flex-col ml-[25rem] mt-8 py-3">
                     <h1 className="text-4xl font-bold mb-6 mt-4">Create New Project</h1>
                     <div className='form'>
-
                         <form>
                             <div className='mb-4'>
                                 <p className='text-gray-600 mb-1 text-sm'>Title</p>
@@ -43,7 +59,7 @@ export default function ProjectScreen({ openProject }) {
                             </div>
                             <div className='mb-4'>
                                 <p className='text-gray-600 mb-1 text-sm'>Due Date</p>
-                                <input onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
+                                <input onChange={handleChangeDueDate} value={dueDate} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
                             </div>
 
                         </form>
@@ -70,7 +86,7 @@ export default function ProjectScreen({ openProject }) {
                     <li className="mb-6">
                         <ul>Select a project or get started with a new one</ul>
                     </li>
-                    <button onClick={() => setIsCreatingProject(true)} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={createNewProject} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         + Create new project
                     </button>
                 </div>
