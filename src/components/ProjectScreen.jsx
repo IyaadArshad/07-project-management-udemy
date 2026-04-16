@@ -2,9 +2,10 @@ import { useState } from 'react';
 import noProjectsImg from '../assets/no-projects.png';
 
 export default function ProjectScreen({ openProject }) {
-    const [creatingProject, setIsCreatingProject] = useState(true);
+    const [creatingProject, setIsCreatingProject] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [dueDate, setDueDate] = useState("");
 
     function handleChange(e) {
         setTitle(e.target.value);
@@ -12,6 +13,10 @@ export default function ProjectScreen({ openProject }) {
 
     function handleChangeDesc(e) {
         setDescription(e.target.value);
+    }
+
+    function createNewProject() {
+        setIsCreatingProject(true);
     }
 
     if (!openProject && !creatingProject) {
@@ -23,7 +28,7 @@ export default function ProjectScreen({ openProject }) {
                     <li className="mb-6">
                         <ul>Select a project or get started with a new one</ul>
                     </li>
-                    <button className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={createNewProject} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         + Create new project
                     </button>
                 </div>
@@ -46,12 +51,21 @@ export default function ProjectScreen({ openProject }) {
                                 <p className='text-gray-600 mb-1 text-sm'>Description</p>
                                 <input onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-36 border-gray-400' type='text' />
                             </div>
+                            <div className='mb-4'>
+                                <p className='text-gray-600 mb-1 text-sm'>Due Date</p>
+                                <input onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
+                            </div>
 
                         </form>
                     </div>
-                    <button className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        + Create new project
-                    </button>
+                    <div>
+                        <button className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Save as new project
+                        </button>
+                        <button className="text-gay-700 font-bold">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </>
         );
