@@ -3,7 +3,7 @@ import ProjectScreen from './components/ProjectScreen';
 function App() {
   return (
     <>
-    <Sidebar />
+      <Sidebar />
       <ProjectScreen />
     </>
   );
