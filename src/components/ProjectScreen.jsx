@@ -164,7 +164,7 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
                     <div className="mb-6 text-lg">
                         <p>Select a project or get started with a new one</p>
                     </div>
-                    <button onClick={createNewProject} className="bg-zinc-50 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100 py-2 px-4">
+                    <button onClick={createNewProject} className="bg-[#593808] border text-lg border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] py-2 px-4">
                         + Create new project
                     </button>
                 </div>
