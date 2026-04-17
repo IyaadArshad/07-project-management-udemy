@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export default function Sidebar({ creatingProject, setIsCreatingProject }) {
     function CreateProject() {
         if (creatingProject) {
@@ -7,6 +9,14 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
         }
     }
 
+    let projectList;
+
+    if (Cookies.get('projects')) {
+        projectList = JSON.parse(Cookies.get('projects'))
+    } else {
+        projectList = false;
+    }
+    
     return (
         <>
             <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-72 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
@@ -19,6 +29,9 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
                             + Add Project
                         </button>
                     </ul>
+                </div>
+                <div>
+                    <h1>hi</h1>
                 </div>
             </aside>
         </>
