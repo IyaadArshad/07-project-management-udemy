@@ -9,10 +9,15 @@ export default function ProjectScreen({ openProject }) {
     const [dueDate, setDueDate] = useState("");
 
     const cookies = Cookies.get('projects')
+    let data;
+    if (Cookies.get('projects')) {
+        data = JSON.parse(cookies);
+    } else {
+        data = { projectList: [] };
+    }
     /*     const cookie = Cookies.set('projects', JSON.stringify({
             "projectList": [{ "title": "test", "description": "test desc", "dueDate": "unknown" }]
         })) */
-       console.log(cookies);
 
     function handleChange(e) {
         setTitle(e.target.value);
@@ -36,6 +41,13 @@ export default function ProjectScreen({ openProject }) {
         // {"projectList":[{"title":"test","description":"test desc","dueDate":"unknown"}]}
         // above is sample list
         // need to append project to project list
+        data.projectList.push(project);
+        Cookies.set('projects', JSON.stringify(data));
+        console.log("updated cookie: ", Cookies.get('projects'))
+        setTitle("")
+        setDescription("")
+        setDueDate("")
+        setIsCreatingProject(false);
     }
 
     function createNewProject() {
@@ -68,7 +80,7 @@ export default function ProjectScreen({ openProject }) {
                         </form>
                     </div>
                     <div>
-                        <button className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={saveProject} className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Save as new project
                         </button>
                         <button onClick={() => setIsCreatingProject(false)} className="text-gay-700 font-bold">
