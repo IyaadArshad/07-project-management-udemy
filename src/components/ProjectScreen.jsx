@@ -34,7 +34,9 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
         const project = {
             title: title,
             description: description,
-            dueDate: dueDate
+            dueDate: dueDate,
+            tasks: [
+            ]
         }
         // need to get current cookies
         // {"projectList":[{"title":"test","description":"test desc","dueDate":"unknown"}]}
@@ -106,10 +108,10 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
                     <p className='text-2xl mb-4'>{openProject.description}</p>
                     <div className='w-[90%] mb-4 border border-b border-b-zinc-700' />
                     <h1 className="text-3xl font-medium mb-4 mt-4">My Tasks</h1>
-                    <div className='bg-[#593808] border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] flex items-center my-4 w-[90%] py-2.5'>
+                    {openProject.tasks.map(task => <div className='bg-[#593808] border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] flex items-center my-4 w-[90%] py-2.5'>
                         <input type='checkbox' className='w-6 h-6 ml-5 mr-3' />
-                        <p className='text-xl'>Test task</p>
-                    </div>
+                        <p className='text-xl'>{task}</p>
+                    </div>)}
                     <button className='bg-[#593808] w-[90%] text-lg border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] w-[90%] py-2.5' >+ Add new task</button>
                     <div className='mt-4'>
                         <button onClick={() => setOpenProject("")} className=" border text-lg rounded-[12px] hover:bg-[#fefad5] hover:text-[#492f07] mr-4 py-2 px-4">
