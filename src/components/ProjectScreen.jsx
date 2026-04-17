@@ -2,7 +2,7 @@ import { useState } from 'react';
 import noProjectsImg from '../assets/no-projects.png';
 import Cookies from 'js-cookie';
 
-export default function ProjectScreen({ openProject, creatingProject, setIsCreatingProject }) {
+export default function ProjectScreen({ openProject, setOpenProject, creatingProject, setIsCreatingProject }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState("");
@@ -45,7 +45,6 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
         } else {
             data.projectList.push(project);
             Cookies.set('projects', JSON.stringify(data));
-            console.log("updated cookie: ", Cookies.get('projects'))
             setTitle("")
             setDescription("")
             setDueDate("")
@@ -60,6 +59,63 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
         setIsCreatingProject(true)
     }
 
+    if (openProject) {
+        console.log("openproject", openProject)
+        // format date from yyyy-mm-dd
+        const unformattedDate = openProject.dueDate
+        const year = unformattedDate.slice(0, 4)
+        const monthNumber = unformattedDate.slice(5, 7)
+        const day = unformattedDate.slice(8, 10)
+        let month;
+
+        // determine month
+        if (monthNumber === "01") {
+            month = "January"
+        } else if (monthNumber === "02") {
+            month = "February"
+        } else if (monthNumber === "03") {
+            month = "March"
+        } else if (monthNumber === "04") {
+            month = "April"
+        } else if (monthNumber === "05") {
+            month = "May"
+        } else if (monthNumber === "06") {
+            month = "June"
+        } else if (monthNumber === "07") {
+            month = "July"
+        } else if (monthNumber === "08") {
+            month = "August"
+        } else if (monthNumber === "09") {
+            month = "September"
+        } else if (monthNumber === "10") {
+            month = "October"
+        } else if (monthNumber === "11") {
+            month = "November"
+        } else if (monthNumber === "12") {
+            month = "December"
+        }
+
+        const formattedDate = `${month} ${day}, ${year}`
+        console.log(formattedDate)
+        return (
+            <>
+                <div className="flex items-start flex-col ml-[30rem] mt-8 py-3">
+                    <h1 className="text-5xl font-bold mb-4 mt-4">{openProject.title}</h1>
+                    <p className='text-xl text-gray-600 mb-4'>Due {formattedDate}</p>
+                    <div className='w-[90%] mb-4 border border-b border-b-zinc-700' />
+                    <p className='text-2xl mb-4'>{openProject.description}</p>
+                    <div className='w-[90%] mb-4 border border-b border-b-zinc-700' />
+                    <h1 className="text-3xl font-medium mb-4 mt-4">My Tasks</h1>
+                    <button className='bg-zinc-50 w-[90%] py-2.5 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100' >+ Add new task</button>
+                    <div className='mt-4'>
+                        <button onClick={() => setOpenProject("")} className="bg-zinc-50 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100 mr-4 py-2 px-4">
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </>
+        );
+    }
     if (creatingProject) {
         return (
             <>
