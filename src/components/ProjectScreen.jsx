@@ -99,7 +99,7 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
         console.log(formattedDate)
         return (
             <>
-                <div className="flex items-start flex-col ml-[30rem] mt-8 py-3">
+                <div className="flex items-start flex-col ml-[30rem] mt-12 py-3">
                     <h1 className="text-5xl font-bold mb-4 mt-4">{openProject.title}</h1>
                     <p className='text-xl text-[#c7c4a4] mb-4'>Due {formattedDate}</p>
                     <div className='w-[90%] mb-4 border border-b border-b-zinc-700' />
@@ -123,30 +123,30 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
     if (creatingProject) {
         return (
             <>
-                <div className="flex items-start flex-col ml-[30rem] mt-8 py-3">
+                <div className="flex items-start flex-col ml-[30rem] mt-12 py-3">
                     <h1 className="text-4xl font-bold mb-6 mt-4">Create New Project</h1>
                     <div className='form'>
                         <form>
                             <div className='mb-4'>
-                                <p className='text-gray-600 mb-1 text-sm'>Title</p>
-                                <input required onChange={handleChange} value={title} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='text' />
+                                <p className='text-[#c7c4a4] mb-1 text-sm'>Title</p>
+                                <input required onChange={handleChange} value={title} className='w-[50rem] rounded-[12px] h-12 bg-transparent border text-lg p-2 border-[#fefad5]' type='text' />
                             </div>
                             <div className='mb-4'>
-                                <p className='text-gray-600 mb-1 text-sm'>Description</p>
-                                <input required onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-36 border-gray-400' type='text' />
+                                <p className='text-[#c7c4a4] mb-1 text-sm'>Description</p>
+                                <input required onChange={handleChangeDesc} value={description} className='bg-transparent border w-[50rem] rounded-[12px] h-36 p-2 border-[#fefad5]' type='text' />
                             </div>
                             <div className='mb-4'>
-                                <p className='text-gray-600 mb-1 text-sm'>Due Date</p>
-                                <input required onChange={handleChangeDueDate} value={dueDate} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
+                                <p className='text-[#c7c4a4] mb-1 text-sm'>Due Date</p>
+                                <input required onChange={handleChangeDueDate} value={dueDate} className='bg-transparent border w-[50rem] rounded-[12px] h-12 p-2 border-[#fefad5]' type='date' />
                             </div>
 
                         </form>
                     </div>
                     <div>
-                        <button onClick={saveProject} className="bg-zinc-50 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100 mr-4 py-2 px-4">
+                        <button onClick={saveProject} className="bg-[#593808] border text-lg border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] mr-4 py-2 px-4 mt-2">
                             Save as new project
                         </button>
-                        <button onClick={() => setIsCreatingProject(false)} className="text-gray-800">
+                        <button onClick={() => setIsCreatingProject(false)} className="text-[#c7c4a4] hover:text-[#9b987e]">
                             Cancel
                         </button>
                     </div>
