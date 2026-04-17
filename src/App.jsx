@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function App() {
   const [creatingProject, setIsCreatingProject] = useState(false);
-  const [openProject, setOpenProject] = useState(0);
+  const [openProject, setOpenProject] = useState("");
 
   return (
     <>
@@ -15,6 +15,7 @@ function App() {
       <ProjectScreen
         openProject={openProject}
         setIsCreatingProject={setIsCreatingProject}
+        setOpenProject={setOpenProject}
         creatingProject={creatingProject} />
     </>
   );
