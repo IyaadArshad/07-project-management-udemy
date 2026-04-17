@@ -98,7 +98,6 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
         }
 
         const formattedDate = `${month} ${day}, ${year}`
-        console.log(formattedDate)
         return (
             <>
                 <div className="flex items-start flex-col ml-[30rem] mt-12 py-3">

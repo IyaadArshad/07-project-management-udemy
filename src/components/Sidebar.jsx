@@ -17,11 +17,6 @@ export default function Sidebar({ creatingProject, setOpenProject, setIsCreating
         projectList = false;
     }
 
-    function OpenProject(title) {
-        console.log("title to open: ", title);
-    }
-
-
     return (
         <>
             <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-96 h-full mt-12 rounded-tr-[8px] transition-transform -translate-x-full sm:translate-x-0 bg-[#593808]" aria-label="Sidebar">
