@@ -94,13 +94,13 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
     if (!openProject && !creatingProject) {
         return (
             <>
-                <div className="flex justify-center items-center flex-col py-3">
-                    <img src={noProjectsImg} alt="No projects" className='w-auto h-32 mt-32' />
-                    <h1 className="text-4xl font-bold mb-6 mt-4">No Project Selected</h1>
-                    <div className="mb-6">
+                <div className="flex justify-center pl-40 items-center flex-col py-3">
+                    <img src={noProjectsImg} alt="No projects" className='w-auto h-40 mt-32' />
+                    <h1 className="text-5xl font-semibold mb-6 mt-4">No Project Selected</h1>
+                    <div className="mb-6 text-lg">
                         <p>Select a project or get started with a new one</p>
                     </div>
-                    <button onClick={createNewProject} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={createNewProject} className="bg-zinc-50 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100 py-2 px-4">
                         + Create new project
                     </button>
                 </div>
