@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export default function Sidebar({ creatingProject, setIsCreatingProject }) {
+export default function Sidebar({ creatingProject, setOpenProject, setIsCreatingProject }) {
     function CreateProject() {
         if (creatingProject) {
             alert('Create project already open')
@@ -13,12 +13,14 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
 
     if (Cookies.get('projects')) {
         projectList = JSON.parse(Cookies.get('projects'))
-        console.log("list", projectList)
     } else {
         projectList = false;
     }
 
-    console.log(projectList)
+    function OpenProject(title) {
+        console.log("title to open: ", title);
+    }
+
 
     return (
         <>
@@ -33,7 +35,7 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
                         </button>
                     </ul>
                     {projectList ? projectList.projectList.map(project => <div className='mt-4 flex justify-center items-center'>
-                        <button className='bg-zinc-50 border border-zinc-300 hover:bg-zinc-100 rounded-[12px] px-3 py-4 w-[95%]'>
+                        <button onClick={() => setOpenProject(project)} className='bg-zinc-50 border border-zinc-300 hover:bg-zinc-100 rounded-[12px] px-3 py-4 w-[95%]'>
                             <h1 className='text-2xl mb-1 font-semibold text-start'>{project.title}</h1>
                             <p className='text-start text-gray-700'>Due on {project.dueDate}</p>
                         </button>
