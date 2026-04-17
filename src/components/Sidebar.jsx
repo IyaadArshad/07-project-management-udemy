@@ -16,22 +16,27 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
     } else {
         projectList = false;
     }
-    
+
+    console.log(projectList)
+
     return (
         <>
-            <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-72 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+            <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-96 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto bg-neutral-primary-soft border-e border-default">
                     <ul className="text-3xl font-bold ml-2 mb-4 mt-2">
                         <h1>Your projects</h1>
                     </ul>
                     <ul className="flex justify-center items-center">
-                        <button onClick={CreateProject} className="bg-blue-500 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 w-[90%] my-2 rounded">
+                        <button onClick={CreateProject} className="bg-zinc-50 border-zinc-300 border rounded-[12px] text-lg hover:bg-zinc-100 py-3 px-4 w-[95%] my-2 rounded">
                             + Add Project
                         </button>
                     </ul>
-                </div>
-                <div>
-                    <h1>hi</h1>
+                    <div className='mt-4 flex justify-center items-center'>
+                        <button className='bg-zinc-50 border border-zinc-300 hover:bg-zinc-100 rounded-[12px] px-3 py-4 w-[95%]'>
+                            <h1 className='text-2xl mb-1 font-semibold text-start'>Project Name</h1>
+                            <p className='text-start text-gray-700'>Due on 02-02-2222</p>
+                        </button>
+                    </div>
                 </div>
             </aside>
         </>
