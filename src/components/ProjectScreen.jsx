@@ -63,7 +63,7 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
     if (creatingProject) {
         return (
             <>
-                <div className="flex items-start flex-col ml-[25rem] mt-8 py-3">
+                <div className="flex items-start flex-col ml-[30rem] mt-8 py-3">
                     <h1 className="text-4xl font-bold mb-6 mt-4">Create New Project</h1>
                     <div className='form'>
                         <form>
