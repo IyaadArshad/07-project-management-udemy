@@ -8,15 +8,17 @@ function App() {
 
   return (
     <>
-      <Sidebar
-        setIsCreatingProject={setIsCreatingProject}
-        creatingProject={creatingProject}
-        setOpenProject={setOpenProject} />
-      <ProjectScreen
-        openProject={openProject}
-        setIsCreatingProject={setIsCreatingProject}
-        setOpenProject={setOpenProject}
-        creatingProject={creatingProject} />
+      <div className='app-container'>
+        <Sidebar
+          setIsCreatingProject={setIsCreatingProject}
+          creatingProject={creatingProject}
+          setOpenProject={setOpenProject} />
+        <ProjectScreen
+          openProject={openProject}
+          setIsCreatingProject={setIsCreatingProject}
+          setOpenProject={setOpenProject}
+          creatingProject={creatingProject} />
+      </div>
     </>
   );
 }
