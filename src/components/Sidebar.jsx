@@ -37,7 +37,7 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
                             <h1 className='text-2xl mb-1 font-semibold text-start'>{project.title}</h1>
                             <p className='text-start text-gray-700'>Due on {project.dueDate}</p>
                         </button>
-                    </div>) : "false"}
+                    </div>) : null}
                 </div>
             </aside >
         </>
