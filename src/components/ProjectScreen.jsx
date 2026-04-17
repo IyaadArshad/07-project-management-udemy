@@ -40,13 +40,17 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
         // {"projectList":[{"title":"test","description":"test desc","dueDate":"unknown"}]}
         // above is sample list
         // need to append project to project list
-        data.projectList.push(project);
-        Cookies.set('projects', JSON.stringify(data));
-        console.log("updated cookie: ", Cookies.get('projects'))
-        setTitle("")
-        setDescription("")
-        setDueDate("")
-        setIsCreatingProject(false);
+        if (!title | !description | !dueDate) {
+            alert('Missing either the date, description or due date')
+        } else {
+            data.projectList.push(project);
+            Cookies.set('projects', JSON.stringify(data));
+            console.log("updated cookie: ", Cookies.get('projects'))
+            setTitle("")
+            setDescription("")
+            setDueDate("")
+            setIsCreatingProject(false);
+        }
     }
 
     function createNewProject() {
@@ -65,24 +69,24 @@ export default function ProjectScreen({ openProject, creatingProject, setIsCreat
                         <form>
                             <div className='mb-4'>
                                 <p className='text-gray-600 mb-1 text-sm'>Title</p>
-                                <input onChange={handleChange} value={title} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='text' />
+                                <input required onChange={handleChange} value={title} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='text' />
                             </div>
                             <div className='mb-4'>
                                 <p className='text-gray-600 mb-1 text-sm'>Description</p>
-                                <input onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-36 border-gray-400' type='text' />
+                                <input required onChange={handleChangeDesc} value={description} className='border w-[40rem] rounded-[12px] h-36 border-gray-400' type='text' />
                             </div>
                             <div className='mb-4'>
                                 <p className='text-gray-600 mb-1 text-sm'>Due Date</p>
-                                <input onChange={handleChangeDueDate} value={dueDate} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
+                                <input required onChange={handleChangeDueDate} value={dueDate} className='border w-[40rem] rounded-[12px] h-10 border-gray-400' type='date' />
                             </div>
 
                         </form>
                     </div>
                     <div>
-                        <button onClick={saveProject} className="bg-blue-500 mr-4 rounded-[999px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={saveProject} className="bg-zinc-50 border text-lg border-zinc-300 rounded-[12px] hover:bg-zinc-100 mr-4 py-2 px-4">
                             Save as new project
                         </button>
-                        <button onClick={() => setIsCreatingProject(false)} className="text-gay-700 font-bold">
+                        <button onClick={() => setIsCreatingProject(false)} className="text-gray-800">
                             Cancel
                         </button>
                     </div>
