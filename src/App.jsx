@@ -4,12 +4,15 @@ import { useState } from 'react';
 
 function App() {
   const [creatingProject, setIsCreatingProject] = useState(false);
+  const [openProject, setOpenProject] = useState("");
+
   return (
     <>
       <Sidebar
         setIsCreatingProject={setIsCreatingProject}
         creatingProject={creatingProject} />
       <ProjectScreen
+      openProject={openProject}
         setIsCreatingProject={setIsCreatingProject}
         creatingProject={creatingProject} />
     </>
