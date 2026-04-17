@@ -2,8 +2,7 @@ import { useState } from 'react';
 import noProjectsImg from '../assets/no-projects.png';
 import Cookies from 'js-cookie';
 
-export default function ProjectScreen({ openProject }) {
-    const [creatingProject, setIsCreatingProject] = useState(false);
+export default function ProjectScreen({ openProject, creatingProject, setIsCreatingProject }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState("");
