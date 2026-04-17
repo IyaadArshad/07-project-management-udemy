@@ -13,6 +13,7 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
 
     if (Cookies.get('projects')) {
         projectList = JSON.parse(Cookies.get('projects'))
+        console.log("list", projectList)
     } else {
         projectList = false;
     }
@@ -31,14 +32,14 @@ export default function Sidebar({ creatingProject, setIsCreatingProject }) {
                             + Add Project
                         </button>
                     </ul>
-                    <div className='mt-4 flex justify-center items-center'>
+                    {projectList ? projectList.projectList.map(project => <div className='mt-4 flex justify-center items-center'>
                         <button className='bg-zinc-50 border border-zinc-300 hover:bg-zinc-100 rounded-[12px] px-3 py-4 w-[95%]'>
-                            <h1 className='text-2xl mb-1 font-semibold text-start'>Project Name</h1>
-                            <p className='text-start text-gray-700'>Due on 02-02-2222</p>
+                            <h1 className='text-2xl mb-1 font-semibold text-start'>{project.title}</h1>
+                            <p className='text-start text-gray-700'>Due on {project.dueDate}</p>
                         </button>
-                    </div>
+                    </div>) : "false"}
                 </div>
-            </aside>
+            </aside >
         </>
     )
 }
