@@ -102,8 +102,23 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
         function AddNewTask() {
             const updatedProject = {
                 ...openProject,
-                tasks: [...openProject.tasks, ""]
+                tasks: [...openProject.tasks, { text: "", checked: false }]
             };
+            setOpenProject(updatedProject);
+            // update cookie
+            const cookies = Cookies.get('projects');
+            let data = JSON.parse(cookies);
+            const projectIndex = data.projectList.findIndex(p => p.title === openProject.title);
+            data.projectList[projectIndex] = updatedProject;
+            Cookies.set('projects', JSON.stringify(data));
+        }
+
+        function handleCheckboxChange(index) {
+            const taskObj = typeof openProject.tasks[index] === 'string' ? { text: openProject.tasks[index], checked: false } : openProject.tasks[index];
+            const updatedTask = { ...taskObj, checked: !taskObj.checked };
+            const updatedTasks = [...openProject.tasks];
+            updatedTasks[index] = updatedTask;
+            const updatedProject = { ...openProject, tasks: updatedTasks };
             setOpenProject(updatedProject);
             // update cookie
             const cookies = Cookies.get('projects');
@@ -123,44 +138,53 @@ export default function ProjectScreen({ openProject, setOpenProject, creatingPro
                     <p className='text-2xl mb-4'>{openProject.description}</p>
                     <div className='w-[90%] mb-4 border border-b border-b-zinc-700' />
                     <h1 className="text-3xl font-medium mb-4 mt-4">My Tasks</h1>
-                    {openProject.tasks.map((task, index) => (
-                        <div key={index} className='bg-[#593808] border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] flex items-center mb-4 w-[90%] py-2.5'>
-                            <input type='checkbox' className='w-6 h-6 ml-5 mr-3' />
-                            {editingIndex === index ? (
+                    {openProject.tasks.map((task, index) => {
+                        const taskObj = typeof task === 'string' ? { text: task, checked: false } : task;
+                        return (
+                            <div key={index} className='bg-[#593808] border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] flex items-center mb-4 w-[90%] py-2.5'>
                                 <input
-                                    value={editedTask}
-                                    onChange={(e) => setEditedTask(e.target.value)}
-                                    className='flex-1 bg-transparent text-xl text-white'
+                                    type='checkbox'
+                                    checked={taskObj.checked}
+                                    onChange={() => handleCheckboxChange(index)}
+                                    className='w-6 h-6 ml-5 mr-3'
                                 />
-                            ) : (
-                                <p className='text-xl flex-1'>{task}</p>
-                            )}
-                            <button
-                                onClick={() => {
-                                    if (editingIndex === index) {
-                                        // save
-                                        const updatedTasks = [...openProject.tasks];
-                                        updatedTasks[index] = editedTask;
-                                        const updatedProject = { ...openProject, tasks: updatedTasks };
-                                        setOpenProject(updatedProject);
-                                        // update cookie
-                                        const cookies = Cookies.get('projects');
-                                        let data = JSON.parse(cookies);
-                                        const projectIndex = data.projectList.findIndex(p => p.title === openProject.title);
-                                        data.projectList[projectIndex] = updatedProject;
-                                        Cookies.set('projects', JSON.stringify(data));
-                                        setEditingIndex(null);
-                                    } else {
-                                        setEditingIndex(index);
-                                        setEditedTask(task);
-                                    }
-                                }}
-                                className='ml-auto mr-5 text-lg'
-                            >
-                                {editingIndex === index ? 'Save' : 'Edit'}
-                            </button>
-                        </div>
-                    ))}
+                                {editingIndex === index ? (
+                                    <input
+                                        value={editedTask}
+                                        onChange={(e) => setEditedTask(e.target.value)}
+                                        className='flex-1 bg-transparent text-xl text-white'
+                                    />
+                                ) : (
+                                    <p className='text-xl flex-1'>{taskObj.text}</p>
+                                )}
+                                <button
+                                    onClick={() => {
+                                        if (editingIndex === index) {
+                                            // save
+                                            const updatedTasks = [...openProject.tasks];
+                                            const currentTaskObj = typeof updatedTasks[index] === 'string' ? { text: updatedTasks[index], checked: false } : updatedTasks[index];
+                                            updatedTasks[index] = { ...currentTaskObj, text: editedTask };
+                                            const updatedProject = { ...openProject, tasks: updatedTasks };
+                                            setOpenProject(updatedProject);
+                                            // update cookie
+                                            const cookies = Cookies.get('projects');
+                                            let data = JSON.parse(cookies);
+                                            const projectIndex = data.projectList.findIndex(p => p.title === openProject.title);
+                                            data.projectList[projectIndex] = updatedProject;
+                                            Cookies.set('projects', JSON.stringify(data));
+                                            setEditingIndex(null);
+                                        } else {
+                                            setEditingIndex(index);
+                                            setEditedTask(taskObj.text);
+                                        }
+                                    }}
+                                    className='ml-auto mr-5 text-lg'
+                                >
+                                    {editingIndex === index ? 'Save' : 'Edit'}
+                                </button>
+                            </div>
+                        );
+                    })}
                     <button className='bg-[#593808] w-[90%] text-lg border border-[#9d5a0b] rounded-[12px] hover:bg-[#492f07] w-[90%] py-2.5'
                         onClick={AddNewTask} >+ Add new task</button>
                     <div className='mt-4'>
